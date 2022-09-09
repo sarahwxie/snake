@@ -31,8 +31,8 @@ function setup(){
   mic = new p5.AudioIn();
 
   // creates the canvas
-  window.canvas = createCanvas(totalPixels + 1, totalPixels + 80);
-  window.canvas.parent('sketch-container');
+  canvas = createCanvas(totalPixels + 1, totalPixels + 80);
+  canvas.parent('sketch-container');
 
   // initialize the classess
   board = new Board();
