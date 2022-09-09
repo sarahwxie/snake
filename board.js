@@ -27,6 +27,13 @@ class Board {
 
   // update the position of the head
   updateSnake(snake, apple){
+    // update the counter for all the turns
+    for (var i = 0; i < snake.turns.length; i++){
+      snake.turns[i].counter ++;
+      if (snake.turns[i].counter > snake.score + 1){
+        snake.turns.splice(i, 1);
+      }
+    }
 
     // iterate through the grid
     for (var x = 0; x < boardSize * pixelSize; x += pixelSize){
@@ -47,6 +54,15 @@ class Board {
         for (var i = 0; i < snake.tails.length; i++){
           if (snake.tails[i].x == x && snake.tails[i].y == y){
             this.gridArray[y/pixelSize][x/pixelSize] = 'T';
+          }
+        }
+
+        // position of the turns
+        for (var i = 0; i < snake.turns.length; i++){
+          if (snake.turns[i].x == x && snake.turns[i].y == y){
+            this.gridArray[y/pixelSize][x/pixelSize] = 'O';
+            // update the direction of the tails
+            snake.updateTailDirection(snake.turns[i]);
           }
         }
 

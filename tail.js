@@ -17,18 +17,22 @@ class Tail {
   }
 
   move(){
-    switch(this.currdirection){
+    switch(this.realDirection){
       case "right":
-        this.x += speed;
+        this.xVel = speed;
+        this.yVel = 0;
         break;
       case "left":
-        this.x -= speed;
+        this.xVel = -speed;
+        this.yVel = 0;
         break;
       case "up":
-        this.y -= speed;
+        this.yVel = -speed;
+        this.xVel = 0;
         break;
       case "down":
-        this.y += speed;
+        this.yVel = speed;
+        this.xVel = 0;
         break;
     }
   }

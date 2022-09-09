@@ -24,34 +24,55 @@ class Snake {
 
   showtail(tail){
     // draw the tail
-    fill(100);
-      rect(tail.x, tail.y, pixelSize, pixelSize);
+    fill(0, 100, 0);
+    rect(tail.x, tail.y, pixelSize, pixelSize);
   }
 
   // ----------- DIRECTION --------------
 
   updateDirection(){
-    this.realDirection = this.supposedDirection;
+    // update the head direction
+    if (this.realDirection != this.supposedDirection){
+      this.realDirection = this.supposedDirection;
 
-    // update velocity based on direction
-    if (this.realDirection == 'left'){
-        this.xVel = -speed;
-        this.yVel = 0;
-      }
-      else if (this.realDirection == 'right'){
-        this.xVel = speed;
-        this.yVel = 0;
-      }
+      // update velocity based on direction
+      if (this.realDirection == 'left'){
+          this.xVel = -speed;
+          this.yVel = 0;
+        }
+        else if (this.realDirection == 'right'){
+          this.xVel = speed;
+          this.yVel = 0;
+        }
 
-      else if (this.realDirection == 'up'){
-        this.yVel = -speed;
-        this.xVel = 0;
-      }
+        else if (this.realDirection == 'up'){
+          this.yVel = -speed;
+          this.xVel = 0;
+        }
 
-      else if (this.realDirection == 'down'){
-        this.yVel = speed;
-        this.xVel = 0;
+        else if (this.realDirection == 'down'){
+          this.yVel = speed;
+          this.xVel = 0;
+        }
+
+        // create a turn
+        var turn = new Turn(this.x, this.y, this.realDirection, 0);
+        this.turns.push(turn);
+    }
+
+  }
+
+  updateTailDirection(turn){
+    // update the tail direction
+    for (var i = 0; i < this.tails.length; i++){
+      console.log("looping through a tail");
+      if (turn.x == this.tails[i].x && turn.y == this.tails[i].y){
+        this.tails[i].realDirection = turn.direction;
+        this.tails[i].move();
+        console.log(this.tails);
       }
+    }
+
   }
 
   // ------------- SCORE -----------------
