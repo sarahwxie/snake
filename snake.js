@@ -24,7 +24,7 @@ class Snake {
 
   showtail(tail){
     // draw the tail
-    fill(100);
+    fill(0, 100, 0);
     rect(tail.x, tail.y, pixelSize, pixelSize);
   }
 
@@ -65,9 +65,7 @@ class Snake {
   updateTailDirection(turn){
     // update the tail direction
     for (var i = 0; i < this.tails.length; i++){
-      console.log("updating turns for: ");
       if (turn.x == this.tails[i].x && turn.y == this.tails[i].y){
-        console.log(this.tails);
         this.tails[i].realDirection = turn.direction;
         this.tails[i].move();
       }
@@ -107,7 +105,6 @@ class Snake {
     }
     var tail = new Tail(lastTail.x + xAlter, lastTail.y + yAlter, lastTail.realDirection , xVel, yVel);
     this.tails.push(tail);
-    console.log(this.tails);
   }
 
   // ------------- SCORE -----------------
@@ -129,6 +126,7 @@ class Snake {
   }
 
   die(){
+    this.dead = true;
     fill(255, 0, 0, 127);
     rect(0, 0, totalPixels, totalPixels);
   }

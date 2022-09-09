@@ -43,6 +43,9 @@ class Board {
         // why is it sideways when I console.log (ASK)
         // update the position of the snake's head
         if (snake.x == x && snake.y == y){
+          if (this.gridArray[y/pixelSize][x/pixelSize] == 'T' || this.gridArray[y/pixelSize][x/pixelSize] == 'O'){
+            snake.die();
+          }
           this.gridArray[y/pixelSize][x/pixelSize] = 'H';
         }
         // set it to blank to reset
@@ -87,8 +90,7 @@ class Board {
         y = int(random(boardSize));
       }
       // check to make sure that the coordinates aren't filled
-      while(this.gridArray[x][y] != ' ')
-
+      while(this.gridArray[y][x] != ' ');
       // write to the apple
       apple.x = x * pixelSize;
       apple.y = y * pixelSize;
