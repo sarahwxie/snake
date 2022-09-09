@@ -30,7 +30,7 @@ class Board {
     // update the counter for all the turns
     for (var i = 0; i < snake.turns.length; i++){
       snake.turns[i].counter ++;
-      if (snake.turns[i].counter > snake.score + 1){
+      if (snake.turns[i].counter > snake.score + 2){
         snake.turns.splice(i, 1);
       }
     }
@@ -68,12 +68,13 @@ class Board {
 
       }
     }
+
     // check if the head is at the apples
     if (snake.x == apple.x && snake.y == apple.y){
       this.updateApple(apple);
+      snake.addTail();
       snake.score += 1;
     }
-    console.log(this.gridArray);
 
   }
 

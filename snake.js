@@ -9,8 +9,8 @@ class Snake {
       this.realDirection = 'right';
       this.dead = false;
       // This can also be done with vectors, but I'm doing with arrays first
-      this.tails = [new Tail(this.x - pixelSize, this.y, "right", "right", 3, 0),
-                    new Tail(this.x - pixelSize * 2, this.y, "right", "right", 3, 0)];
+      this.tails = [new Tail(this.x - pixelSize, this.y, "right", speed, 0),
+                    new Tail(this.x - pixelSize * 2, this.y, "right", speed, 0)];
       this.score = 0;
       this.turns = []
   }
@@ -24,7 +24,7 @@ class Snake {
 
   showtail(tail){
     // draw the tail
-    fill(0, 100, 0);
+    fill(100);
     rect(tail.x, tail.y, pixelSize, pixelSize);
   }
 
@@ -65,14 +65,49 @@ class Snake {
   updateTailDirection(turn){
     // update the tail direction
     for (var i = 0; i < this.tails.length; i++){
-      console.log("looping through a tail");
+      console.log("updating turns for: ");
       if (turn.x == this.tails[i].x && turn.y == this.tails[i].y){
+        console.log(this.tails);
         this.tails[i].realDirection = turn.direction;
         this.tails[i].move();
-        console.log(this.tails);
       }
     }
 
+  }
+  // ------------- TAIL ------------------
+  addTail(){
+    var lastTail = this.tails[this.tails.length - 1];
+    var xAlter, yAlter, xVel, yVel;
+    var yAlter;
+    switch(lastTail.realDirection){
+      case "right":
+        xAlter = -pixelSize;
+        yAlter = 0;
+        xVel = speed;
+        yVel = 0;
+        break;
+      case "left":
+        xAlter = pixelSize;
+        yAlter = 0;
+        xVel = -speed;
+        yVel = 0;
+        break;
+      case "up":
+        yAlter = pixelSize;
+        xAlter = 0;
+        xVel = 0;
+        yVel = -speed;
+        break;
+      case "down":
+        yAlter = -pixelSize;
+        xAlter = 0;
+        xVel = 0;
+        yVel = speed;
+        break;
+    }
+    var tail = new Tail(lastTail.x + xAlter, lastTail.y + yAlter, lastTail.realDirection , xVel, yVel);
+    this.tails.push(tail);
+    console.log(this.tails);
   }
 
   // ------------- SCORE -----------------
