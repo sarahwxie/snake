@@ -9,22 +9,23 @@ class Snake {
       this.realDirection = 'right';
       this.dead = false;
       // This can also be done with vectors, but I'm doing with arrays first
-      this.tails = [new Tail(this.x - pixelSize, this.y, "right", "right"),
-                    new Tail(this.x - pixelSize * 2, this.y, "right", "right")];
+      this.tails = [new Tail(this.x - pixelSize, this.y, "right", "right", 3, 0),
+                    new Tail(this.x - pixelSize * 2, this.y, "right", "right", 3, 0)];
       this.score = 0;
       this.turns = []
   }
 
+  // ----------- DISPLAY --------------
   show(){
+    // draw the head
     fill(0, 100, 0);
     rect(this.x, this.y, pixelSize, pixelSize);
+  }
 
-    fill(100);
+  showtail(tail){
     // draw the tail
-    for (let i = 0; i < this.tails.length; i++){
-      // this.tails[i] = {x, y, direction}
-      rect(this.tails[i].x, this.tails[i].y, pixelSize, pixelSize);
-    }
+    fill(100);
+      rect(tail.x, tail.y, pixelSize, pixelSize);
   }
 
   // ----------- DIRECTION --------------

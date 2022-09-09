@@ -1,9 +1,11 @@
 class Tail {
-  constructor(x,y, currdirection, direction){
+  constructor(x,y, supposedDirection, realDirection, xVel, yVel){
       this.x = x;
       this.y = y;
-      this.currdirection = currdirection;
-      this.direction = direction;
+      this.supposedDirection = supposedDirection;
+      this.realDirection = realDirection;
+      this.xVel = xVel;
+      this.yVel = yVel;
   }
 
   matchDirections(x, y){

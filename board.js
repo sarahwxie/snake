@@ -27,23 +27,37 @@ class Board {
 
   // update the position of the head
   updateSnake(snake, apple){
+
     // iterate through the grid
-    for (var x = 0; x < boardSize * pixelSize; x += pixelSize ){
+    for (var x = 0; x < boardSize * pixelSize; x += pixelSize){
       for (var y = 0; y < boardSize * pixelSize; y += pixelSize){
         // x and y are the coordinates
 
+        // why is it sideways when I console.log (ASK)
         // update the position of the snake's head
         if (snake.x == x && snake.y == y){
-          this.gridArray[x/pixelSize][y/pixelSize] = 'H';
+          this.gridArray[y/pixelSize][x/pixelSize] = 'H';
+        }
+        // set it to blank to reset
+        else {
+          this.gridArray[y/pixelSize][x/pixelSize] = ' ';
         }
 
-        // check if the head is at the apples
-        if (snake.x == apple.x && snake.y == apple.y){
-          this.updateApple(apple);
-          snake.score += 1;
+        // position of the tails
+        for (var i = 0; i < snake.tails.length; i++){
+          if (snake.tails[i].x == x && snake.tails[i].y == y){
+            this.gridArray[y/pixelSize][x/pixelSize] = 'T';
+          }
         }
+
       }
     }
+    // check if the head is at the apples
+    if (snake.x == apple.x && snake.y == apple.y){
+      this.updateApple(apple);
+      snake.score += 1;
+    }
+    console.log(this.gridArray);
 
   }
 

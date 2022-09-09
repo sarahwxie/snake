@@ -59,9 +59,16 @@ function draw(){
     snake.die();
   }
   else {
-    // play the game
+    // update the head position
     snake.x += snake.xVel;
     snake.y += snake.yVel;
+
+    // draw the tails
+    for (var i = 0; i < snake.tails.length; i++){
+      snake.tails[i].x += snake.tails[i].xVel;
+      snake.tails[i].y += snake.tails[i].yVel;
+      snake.showtail(snake.tails[i]);
+    }
 
     // every pixel, do your computations
     if (snake.y % pixelSize == 0 && snake.x % pixelSize == 0){
