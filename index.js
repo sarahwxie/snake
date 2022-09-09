@@ -1,5 +1,5 @@
 // currently, boardSize needs to be even
-var boardSize = 20;
+var boardSize = 16;
 var pixelSize = 30;
 var totalPixels = boardSize * pixelSize;
 var speed = 3;
@@ -32,6 +32,7 @@ function setup(){
 
   // creates the canvas
   window.canvas = createCanvas(totalPixels + 1, totalPixels + 80);
+  window.canvas.parent('sketch-container');
 
   // initialize the classess
   board = new Board();
